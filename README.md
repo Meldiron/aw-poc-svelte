@@ -85,6 +85,8 @@ Svelte does not support form validations, but there are plugins such as https://
 
 We could also use more general solution, such as https://github.com/jquense/yup
 
+Svelte-forms-lib can be used alongside yup: https://svelte-forms-lib-sapper-docs-tjin.vercel.app/yup
+
 ### Tests
 
 Svelte does not seem to have test support built-in, but I have seen articles about using jest for testing. For example: https://timdeschryver.dev/blog/how-to-test-svelte-components

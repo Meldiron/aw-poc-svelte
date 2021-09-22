@@ -21,6 +21,11 @@
 			path: '/settings',
 			name: 'Settings',
 			isExact: false
+		},
+		{
+			path: '/calc',
+			name: 'Calculator',
+			isExact: false
 		}
 	];
 </script>
