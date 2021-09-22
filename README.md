@@ -6,14 +6,6 @@ Project to test possibilities and limitations of Svelte Kit. This README explain
 
 We try to have as little dependencies as possible. Currently, project only uses depenrencies created by `svelte-kit`. No non-dev dependencies yet, except AppwriteSDK 🤩
 
-### Fetching data from JSON files
-
-Fetching looks to not be problem at all. There are multiple ways of doing this, you can find it in `src/routes/index.svelte`.
-
-1. Static file import (typescript `import` keyword)
-2. Fetch static file (javascript `fetch()` from `static/` folder)
-3. SvelteKit endpoint (javascript server-side code. Runs once at build process and generates file. Something like serverless function that runs once and is cached until next build)
-
 ### CSS styles
 
 Svelte Kit introduces no features, but also no limits. It understands CSS pre-compilers and it supports per-component styling. Nothing special, pretty common for all frameworks.
@@ -71,11 +63,43 @@ You can use `$` syntax in HTML too, saves a lot of boilerplate.
 
 5. Same for active menu item, Svelte doesn't seem to have official way of doing this. We can implement it on our own by watching Svelte's `page` state and checking if current route matches menu item. Example ins `src/routes/__layout.svelte`.
 
-### TODO: Fetching data from HTTP API server
+### Fetching data from JSON files
 
-### TODO: Actual form to communicate with Appwrite SDK
+Fetching looks to not be problem at all. There are multiple ways of doing this, you can find it in `src/routes/index.svelte`.
 
-### TODO: Tests
+1. Static file import (typescript `import` keyword)
+2. Fetch static file (javascript `fetch()` from `static/` folder)
+3. SvelteKit endpoint (javascript server-side code. Runs once at build process and generates file. Something like serverless function that runs once and is cached until next build)
+
+### Fetching data from HTTP API server
+
+Just like our web SDK does, we will use `fetch()`. I fetched list of Appwrite functions in `src/routes/functions/index.svelte`. API key is missing, so it probably does not work for you. Connect to your Appwrite instance to see results (or ask me for the API key).
+
+### Form talking to Appwrite
+
+Svelte does not support form validations, but there are plugins such as https://github.com/chainlist/svelte-forms or https://github.com/tjinauyeung/svelte-forms-lib.
+
+We could also use more general solution, such as https://github.com/jquense/yup
+
+### Tests
+
+Svelte does not seem to have test support built-in, but I have seen articles about using jest for testing. For example: https://timdeschryver.dev/blog/how-to-test-svelte-components
+
+If talking about tests in general, I also found two really interesting tools:
+
+- E2E (end to end) tests: https://www.cypress.io/
+- VRT (visual reference tests) tests: https://github.com/garris/BackstopJS
+
+_CyPress has free plan for OOS, more at https://docs.cypress.io/guides/dashboard/organizations#Features_
+
+You never heard of E2E testing? It is supposed to replace unit tests in a smarter way. It goes over the website, clicks everything, tries every resolution.. If it sees unexpected behaviour, it tells you. **This tests can usually find JS mistakes when you affect all button components when you only wanted to add one new option.**
+
+You never heard about VRT? Yeah, same.. It takes screenshots of development&production and compare it. Did you remove padding? Added margin? Changed different part of website because you didn't know which part of CSS you should edit? Yeah, VRT will tell you. **This test can usually find all CSS mistakes when afecting different part of application than you expected.**
+
+### Possible problems
+
+- Not sure how to separate development and production configuration
+- If the response of `fetch` is not typed, we end up with errors like `Property 'name' does not exist on type 'unknown'` in HTML code
 
 ---
 
