@@ -4,11 +4,13 @@ Project to test possibilities and limitations of Svelte Kit. This README explain
 
 ### Dependencies
 
-We try to have as little dependencies as possible. Currently, project only uses depenrencies created by `svelte-kit`. No non-dev dependencies yet, except AppwriteSDK 🤩
+We try to have as little dependencies as possible. Currently, project only uses depenrencies created by `svelte-kit`. No non-dev dependencies yet 🤩
 
 ### CSS styles
 
-Svelte Kit introduces no features, but also no limits. It understands CSS pre-compilers and it supports per-component styling. Nothing special, pretty common for all frameworks.
+Svelte Kit introduces no features, but also no limits. It understands CSS pre-compilers and it supports per-component styling. Nothing special, pretty common for all frameworks. With CSS, this is mostly our job to keep everything structured so we don't end up with questions "Will I break the whole website if I add my class in here?".
+
+Btw, I would love to have internal discussion about CSS vs Bootstrap vs Tailwind.
 
 ### State management
 
@@ -43,9 +45,11 @@ const usersSubsription = users.subscribe((newUsers) => {
 
 You can use `$` syntax in HTML too, saves a lot of boilerplate.
 
+You can have multiple state objects and you can easily share them with `export` key.
+
 ### Routing
 
-1. You can use both folder or file structure to represent route structure. For example:
+1. You can use both folder and file structure to represent route structure. For example:
 
 - `index.svelte` = `/`
 
@@ -55,7 +59,7 @@ You can use `$` syntax in HTML too, saves a lot of boilerplate.
 - `functions/logs.svelte` = `/functions/logs`
 - `functions/logs/index.svelte` = `/functions/logs`
 
-2. You can use `__layout.svelte` to show some part of the code on multiple routes, for example header or footer. You are also able to have different header on un-authentificated and authentificated pages.
+2. You can use `__layout.svelte` to show some part of the code on multiple routes, for example header or footer. It will apply to all files inside a folder where you put layout (recursively). You are also able to have different header on un-authentificated and authentificated pages.
 
 3. Dynamic URLs are pretty simple, once again, represented in folder structire. You can easily access the information using `page` store provied by Svelte. Example in `src/routes/functions/f-[functionId].svelte`.
 
@@ -73,7 +77,7 @@ Fetching looks to not be problem at all. There are multiple ways of doing this, 
 
 ### Fetching data from HTTP API server
 
-Just like our web SDK does, we will use `fetch()`. I fetched list of Appwrite functions in `src/routes/functions/index.svelte`. API key is missing, so it probably does not work for you. Connect to your Appwrite instance to see results (or ask me for the API key).
+Just like our web SDK does, we will use `fetch()`. I fetched list of Appwrite functions in `src/routes/functions/index.svelte`. API key is exposed, don't worry, it's test project and I will delete key in future.
 
 ### Form talking to Appwrite
 
@@ -90,7 +94,7 @@ If talking about tests in general, I also found two really interesting tools:
 - E2E (end to end) tests: https://www.cypress.io/
 - VRT (visual reference tests) tests: https://github.com/garris/BackstopJS
 
-_CyPress has free plan for OOS, more at https://docs.cypress.io/guides/dashboard/organizations#Features_
+_CyPress has free plan for OOS, more at https://docs.cypress.io/guides/dashboard/organizations#Features. It is free, you pay for could-based tests._
 
 You never heard of E2E testing? It is supposed to replace unit tests in a smarter way. It goes over the website, clicks everything, tries every resolution.. If it sees unexpected behaviour, it tells you. **This tests can usually find JS mistakes when you affect all button components when you only wanted to add one new option.**
 
