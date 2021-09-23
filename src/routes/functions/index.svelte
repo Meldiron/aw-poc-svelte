@@ -37,6 +37,8 @@
 
 	{#each functionsQuery.functions as f}
 		<h5>{f.name}</h5>
+	{:else}
+		<p>No functions found</p>
 	{/each}
 {:catch error}
 	<p style="color: red">{error}</p>

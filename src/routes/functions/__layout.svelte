@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Functions</title>
+</svelte:head>
+
 <hr />
 <i>Tabs</i>
 <header>

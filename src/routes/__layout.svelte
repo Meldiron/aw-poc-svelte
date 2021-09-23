@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { VisitState } from '../store';
 
 	const menuItems = [
 		{
@@ -28,15 +29,21 @@
 			isExact: false
 		}
 	];
+
+	function onRedirect(path: string) {
+		return () => {
+			VisitState.addVisit(path);
+		};
+	}
 </script>
 
 <header>
 	{#each menuItems as menuItem}
 		<a
+			on:click={onRedirect($page.path)}
 			class:selected={menuItem.isExact
 				? $page.path === menuItem.path
 				: $page.path.startsWith(menuItem.path)}
-			style="margin: 0 20px;"
 			href={menuItem.path}>{menuItem.name}</a
 		>
 	{/each}
@@ -47,5 +54,9 @@
 <style>
 	.selected {
 		font-size: 32px;
+	}
+
+	a {
+		margin: 0 20px;
 	}
 </style>

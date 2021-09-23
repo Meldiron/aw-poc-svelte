@@ -36,7 +36,7 @@ const users = writable([
 If you want to read, you simply stick `$` in front, or you use `.subscribe`:
 
 ```js
-const usersSnapshop = $users;
+const usersSnapshot = $users;
 
 const usersSubsription = users.subscribe((newUsers) => {
 	console.log('Users changed', newUsers);
@@ -87,14 +87,17 @@ We could also use more general solution, such as https://github.com/jquense/yup
 
 Svelte-forms-lib can be used alongside yup: https://svelte-forms-lib-sapper-docs-tjin.vercel.app/yup
 
+We might not even need this... Simple HTML validation is okay and for complex valudation we can use same logic as we used with "ID does not exist" in customID branch.
+
 ### Tests
 
 Svelte does not seem to have test support built-in, but I have seen articles about using jest for testing. For example: https://timdeschryver.dev/blog/how-to-test-svelte-components
 
 If talking about tests in general, I also found two really interesting tools:
 
-- E2E (end to end) tests: https://www.cypress.io/
-- VRT (visual reference tests) tests: https://github.com/garris/BackstopJS
+- Unit tests - State management
+- E2E (end to end) tests: https://www.cypress.io/ - Everything else (JS)
+- VRT (visual reference tests) tests: https://github.com/garris/BackstopJS or https://storybook.js.org/ - Everything else (CSS)
 
 _CyPress has free plan for OOS, more at https://docs.cypress.io/guides/dashboard/organizations#Features. It is free, you pay for could-based tests._
 
@@ -102,10 +105,11 @@ You never heard of E2E testing? It is supposed to replace unit tests in a smarte
 
 You never heard about VRT? Yeah, same.. It takes screenshots of development&production and compare it. Did you remove padding? Added margin? Changed different part of website because you didn't know which part of CSS you should edit? Yeah, VRT will tell you. **This test can usually find all CSS mistakes when afecting different part of application than you expected.**
 
+There seems to be one more test called "Blackbox testing" which knows nothing about software itself, but runs the app on multiple enviroments and check if same input gives same output on all of them. We might not even need these tests.
+
 ### Possible problems
 
-- Not sure how to separate development and production configuration
-- If the response of `fetch` is not typed, we end up with errors like `Property 'name' does not exist on type 'unknown'` in HTML code
+- Not sure how to separate development and production configuration, but it is possible
 
 ---
 
